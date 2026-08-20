@@ -1,35 +1,33 @@
 # GHOST-Vault
 
-[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Enterprise Secrets Intelligence & Credential Sanitizer**  
+> **Enterprise Secrets Sanitizer & Secure Storage Engine**  
 > Developed by Abdulaziz (Ghost-SY1).
 
 ---
 
-## Overview
-**GHOST-Vault** is a robust, open-source command-line framework engineered to solve a pervasive problem among penetration testers, security researchers, and software engineers: **accidental exposure of hardcoded secrets, API keys, private keys, and sensitive credentials in source code repositories**.
+## Table of Contents
+1. [Overview & Purpose](#overview--purpose)
+2. [Core Architecture](#core-architecture)
+3. [Usage & CLI Reference](#usage-guide--cli-reference)
+4. [License](#license)
 
 ---
 
-## Key Features
-- **Deep Recursive Scanning**: Inspects directories, configuration files, and source code for high-entropy tokens and credential keywords.
-- **Empirical Evidence Extraction**: Logs exact file paths, line numbers, and truncated match snippets without storing raw secrets in insecure logs.
-- **Structured Reporting**: Exports findings directly to standardized JSON and CSV formats for audit trails and CI/CD integration.
-- **Secure CLI Workflow**: Direct terminal execution with clean output formatting.
+## Overview & Purpose
+**GHOST-Vault** is an enterprise-grade utility designed to scan codebases, configuration files, and evidentiary drops for exposed API keys, private keys, passwords, and tokens, sanitizing them before reporting or storage.
 
 ---
 
-## Installation & Usage
+## Core Architecture
+- **Regex Sanitization Engine**: Matches standard high-entropy secrets and credentials.
+- **SHA-256 Fingerprinting**: Tags sanitized outputs with cryptographic integrity hashes.
+
+---
+
+## Usage
 ```bash
-git clone https://github.com/GhostSy1/GHOST-Vault.git
-cd GHOST-Vault
-pip install -r requirements.txt
-python3 main.py --scan /path/to/project
+python3 main.py --scan /path/to/project --out sanitized.json
 ```
-
----
-
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
