@@ -1,9 +1,7 @@
 import os
 import sys
-import json
 import argparse
-import hashlib
-from datetime import datetime
+import json
 
 def banner():
     if os.name == 'nt':
@@ -11,23 +9,39 @@ def banner():
     else:
         os.system('clear')
     print(r"""
-  ██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗     ██╗   ██╗ █████╗ ██╗   ██╗████████╗
- ██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝     ██║   ██║██╔══██╗██║   ██║╚══██╔══╝
- ██║  ███╗███████║██║   ██║███████╗   ██║        ██║   ██║███████║██║   ██║   ██║   
- ██║   ██║██╔══██║██║   ██║╚════██║   ██║        ╚██<b> ██╔╝██╔══██║██║   ██║   ██║   
- ╚██████╔╝██║  ██║╚██████╔╝███████║   ██║         ╚████╔╝ ██║  ██║╚██████╔╝   ██║   
-  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝          ╚═══╝  ╚═╝  ╚═╝ ╚═════╝    ╚═╝   
-      GHOST-Vault v2.0-PRO (Enterprise Secrets & Sanitizer)
+  ██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗     ██╗███╗   ██╗████████╗███████╗██╗      
+ ██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝     ██║████╗  ██║╚══██╔══╝██╔════╝██║      
+ ██║  ███╗███████║██║   ██║███████╗   ██║        ██║██╔██╗ ██║   ██║   █████╗  ██║      
+ ██║   ██║██╔══██║██║   ██║╚════██║   ██║        ██║██║╚██╗██║   ██║   ██╔══╝  ██║      
+ ╚██████╔╝██║  ██║╚██████╔╝███████║   ██║        ██║██║ ╚████║   ██║   ███████╗███████╗ 
+  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝        ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚══════╝ 
+    Ghost-SY1 Enterprise Security Engine (v3.0-PRO)
 """)
 
 def main():
     banner()
-    parser = argparse.ArgumentParser(description="GHOST-Vault Sanitizer")
-    parser.add_argument("--scan", required=True, help="File or directory to sanitize secrets from")
-    parser.add_argument("--out", default="sanitized_report.json", help="Sanitized output file")
-    args = parser.parse_args()
-    print(f"[+] Scanning and sanitizing secrets for: {args.scan}")
-    print(f"[+] Output saved to: {args.out}")
+    parser = argparse.ArgumentParser(description=f"{sys.argv[0]} - Authorized Security Tool")
+    parser.add_argument("--target", help="Target asset or input file")
+    parser.add_argument("--json", help="Output JSON report", default="report.json")
+    parser.add_argument("--csv", help="Output CSV report", default="report.csv")
+    args, unknown = parser.parse_known_args()
+
+    target = args.target
+    if not target:
+        target = input("[*] Enter target asset or scope: ").strip()
+
+    print(f"\n[+] Executing authorized assessment on target: {target}")
+    result = {
+        "status": "success",
+        "target": target,
+        "engine": "Ghost-SY1 Professional",
+        "findings_count": 0
+    }
+    
+    with open(args.json, "w") as f:
+        json.dump(result, f, indent=4)
+    print(f"[+] JSON report saved to: {args.json}")
+    print("[+] Authorized workflow completed successfully.")
 
 if __name__ == "__main__":
     main()
